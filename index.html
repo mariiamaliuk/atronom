@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator ROI budżetu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kalkulator ROI budżetu</h1>
+      <p class="lead">Podaj roczny budżet, podziel go między kategorie i sprawdź oczekiwany zwrot z inwestycji.</p>
+    </header>
+
+    <section class="card">
+      <label class="budget">
+        <span>Roczny budżet (PLN)</span>
+        <input id="budget" type="number" min="0" step="100" inputmode="decimal">
+      </label>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Kategorie</h2>
+        <span id="share-sum" class="badge"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kategoria</th>
+              <th class="num">Udział %</th>
+              <th class="num">ROI %</th>
+              <th class="num">Inwestycja</th>
+              <th class="num">Zysk</th>
+              <th class="num">Przychód</th>
+              <th><span class="sr-only">Usuń</span></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+
+      <p id="alert" class="alert" role="status" hidden></p>
+
+      <div class="actions">
+        <button id="add" type="button">+ Dodaj kategorię</button>
+        <button id="reset" type="button" class="secondary">Resetuj</button>
+      </div>
+    </section>
+
+    <section class="summary" aria-live="polite">
+      <div class="stat"><span>Zainwestowano</span><strong id="sum-invested"></strong></div>
+      <div class="stat"><span>Oczekiwany zysk</span><strong id="sum-profit"></strong></div>
+      <div class="stat highlight"><span>Całkowity ROI</span><strong id="sum-roi"></strong></div>
+      <div class="stat"><span>Wartość końcowa</span><strong id="sum-revenue"></strong></div>
+    </section>
+  </main>
+
+  <template id="row-template">
+    <tr>
+      <td data-label="Kategoria"><input class="name" type="text" aria-label="Nazwa kategorii"></td>
+      <td data-label="Udział %" class="num"><input class="share" type="number" min="0" max="100" step="1" inputmode="decimal" aria-label="Udział w budżecie (%)"></td>
+      <td data-label="ROI %" class="num"><input class="roi" type="number" step="1" inputmode="decimal" aria-label="Oczekiwany ROI (%)"></td>
+      <td data-label="Inwestycja" class="num out invested"></td>
+      <td data-label="Zysk" class="num out profit"></td>
+      <td data-label="Przychód" class="num out revenue"></td>
+      <td class="del-cell"><button class="del" type="button" aria-label="Usuń kategorię" title="Usuń">×</button></td>
+    </tr>
+  </template>
+
+  <script src="calc.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
